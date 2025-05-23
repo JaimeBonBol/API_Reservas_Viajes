@@ -60,6 +60,10 @@ public class ReservaServiceImpl implements ReservaService {
         //Se actualiza el vuelo.
         vueloService.actualizarVuelo(vueloReserva.getId(), vueloReserva);
 
+        // Asignar las entidades completas a la reserva antes de guardar
+        reserva.setVueloAsociado(vueloReserva);
+        reserva.setHotelAsociado(hotelReserva);
+
         return reservaRepository.agregarReserva(reserva);
     }
 

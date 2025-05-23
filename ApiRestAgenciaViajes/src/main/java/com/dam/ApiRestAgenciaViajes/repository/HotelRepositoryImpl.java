@@ -87,19 +87,4 @@ public class HotelRepositoryImpl implements HotelRepository{
         hotelJPASpringData.deleteById(id);
     }
 
-    /**
-     * Metodo para eliminar un hotel según su nombre. Obtiene el hotel a eliminar a partir del
-     * nombre  y si este no es null lo elimina.
-     * @param nombre Nombre del hotel a eliminar.
-     * @return Hotel eliminado.
-     */
-    @Override
-    public Hotel eliminarHotelPorNombre(String nombre) {
-        /*Hotel hotelEliminar = hotelJPASpringData.findByNombre(nombre).orElse(null);
-        if (hotelEliminar != null) {
-            hotelJPASpringData.delete(hotelEliminar);
-        }
-        return hotelEliminar;*/
-        return hotelJPASpringData.deleteHotelByNombre(nombre);
-    }
 }

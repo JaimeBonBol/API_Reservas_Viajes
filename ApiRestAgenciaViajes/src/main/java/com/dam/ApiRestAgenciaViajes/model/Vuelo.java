@@ -1,5 +1,7 @@
 package com.dam.ApiRestAgenciaViajes.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -9,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "vuelo")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Vuelo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +45,7 @@ public class Vuelo {
     LinkedHashSet además da la ventaja de preservar el orden de llegada, lo cual puede ser útil si muestras las reservas en orden de creación.
      */
     @OneToMany(mappedBy = "vueloAsociado")
+    @JsonIgnore
     private Set<Reserva> reservas = new LinkedHashSet<>();
 
     public Long getId() {

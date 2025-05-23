@@ -24,7 +24,7 @@ public class HotelController {
         return hotelService.listarHotelesDisponibles();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Hotel buscarHotelPorId(@PathVariable Long id) {
         return hotelService.buscarHotelPorId(id);
     }
@@ -45,13 +45,8 @@ public class HotelController {
     }
 
     @DeleteMapping("/{id}")
-    public Hotel eliminarHotelPorId(@PathVariable Long id) {
-        return hotelService.eliminarHotelPorId(id);
-    }
-
-    @DeleteMapping("/nombre/{nombre}")
-    public Hotel eliminarHotelPorNombre(@PathVariable String nombre) {
-        return hotelService.eliminarHotelPorNombre(nombre);
+    public void eliminarHotelPorId(@PathVariable Long id) {
+        hotelService.eliminarHotelPorId(id);
     }
 
 }

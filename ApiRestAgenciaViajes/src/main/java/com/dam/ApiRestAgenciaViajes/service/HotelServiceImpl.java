@@ -114,7 +114,7 @@ public class HotelServiceImpl implements HotelService {
      * @return Hotel eliminado.
      */
     @Override
-    public Hotel eliminarHotelPorId(Long id) {
+    public void eliminarHotelPorId(Long id) {
         Hotel hotelEliminado = hotelRepository.obtenerHotelPorId(id);
         if (hotelEliminado == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Hotel no encontrado");
@@ -122,24 +122,5 @@ public class HotelServiceImpl implements HotelService {
 
         hotelRepository.eliminarHotelPorId(id);
 
-        return hotelEliminado;
-    }
-
-    /**
-     * Método para eliminar hotel según su nombre. Guarda el hotel que ha sido eliminado de la base dee datos
-     * y si este es null lanza un error.
-     * @param nombre Id del hotel a eliminar.
-     * @return Hotel eliminado.
-     */
-    @Override
-    public Hotel eliminarHotelPorNombre(String nombre) {
-        Hotel hotelEliminado = hotelRepository.obtenerHotelPorNombre(nombre);
-        if (hotelEliminado == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Hotel no encontrado");
-        }
-
-        hotelRepository.eliminarHotelPorNombre(nombre);
-
-        return hotelEliminado;
     }
 }

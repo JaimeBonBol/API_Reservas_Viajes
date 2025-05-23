@@ -21,6 +21,4 @@ public interface HotelRepository {
 
     public void eliminarHotelPorId(Long id);
 
-    public Hotel eliminarHotelPorNombre(String nombre);
-
 }

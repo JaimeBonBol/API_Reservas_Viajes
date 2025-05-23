@@ -1,0 +1,98 @@
+# Primer_MicroServicio
+Mi primer microservicio
+Capa	                Responsabilidad principal
+Controlador	            Recibe peticiones HTTP, las valida superficialmente y llama al servicio.
+Servicio	            Contiene la lógica de negocio (como verificar plazas y actualizar vuelo).
+Repositorio	            Accede a la base de datos (CRUD, consultas, etc.).
+
+1. Controller (Capa web)
+
+   📡 Se encarga de recibir y responder a las peticiones HTTP.
+
+   ✅ Valida las entradas (con @RequestBody, @Valid, etc.).
+
+   🚚 Pasa los datos a la capa de servicio para procesarlos.
+
+   📦 Devuelve el resultado como respuesta al cliente.
+
+No debe tener lógica compleja. Si metes lógica aquí, se vuelve difícil de mantener y probar.
+2. Service (Capa de negocio)
+
+   🧠 Aquí va la lógica de negocio: reglas, validaciones, cálculos, decisiones.
+
+   Ejemplos:
+
+        Hay plazas en el vuelo
+
+        ¿El hotel está disponible?
+
+        ¿Debo lanzar un error o guardar la reserva?
+
+Es el corazón del sistema: el "qué hacer".
+3. Repository (Capa de acceso a datos)
+
+   💾 Se comunica directamente con la base de datos.
+
+   No toma decisiones. Solo guarda, actualiza, busca o borra datos.
+
+la razón por la que en el body de la Reserva usamos esta forma:
+
+"vueloAsociado": { "id": 1 },
+"hotelAsociado": { "id": 2 }
+
+es porque estás trabajando con objetos completos en una relación JPA, y no solo con IDs como campos planos.
+
+ 1. Reserva contiene objetos enteros, no solo IDs:
+
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "vuelo_asociado")
+private Vuelo vueloAsociado;
+
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "hotel_asociado")
+private Hotel hotelAsociado;
+
+➡️ Eso significa que el campo espera un objeto de tipo Vuelo y Hotel, no simplemente un Long con el ID.
+🧠 2. Jackson (la librería de JSON de Spring Boot) necesita un objeto válido
+
+Cuando haces un POST con JSON, Spring (a través de Jackson) intenta deserializarlo a tu clase Java.
+
+Entonces este:
+
+"vueloAsociado": { "id": 1 }
+
+Jackson lo interpreta como:
+👉 “crear un objeto Vuelo con ID = 1, los demás campos me dan igual”.
+
+Esto permite que Spring lo pase como un Vuelo a tu servicio, y allí ya puedes buscar el objeto completo por ID.
+
+
+la relación entre Vuelo/Hotel y Reserva es una relación padre-hijo porque:
+
+    Un Vuelo (o un Hotel) puede tener muchas reservas asociadas: 1 vuelo → N reservas.
+
+    Cada Reserva está asociada a un solo Vuelo y un solo Hotel.
+
+Es decir, desde el punto de vista del diseño:
+
+    Vuelo y Hotel son la entidad “dueña” o “padre” porque existen independientemente y contienen una colección de reservas.
+
+    Reserva es la entidad “hija” o dependiente, ya que su existencia está ligada a un vuelo y un hotel específicos (además tiene claves foráneas a estas tablas).
+
+Por eso:
+
+    En JPA, en el lado del padre (Vuelo y Hotel) defines un @OneToMany — un vuelo tiene muchas reservas.
+
+    En el lado hijo (Reserva) defines un @ManyToOne — cada reserva apunta a un solo vuelo y hotel.
+
+En términos de serialización JSON:
+
+    Cuando serializas un Vuelo o un Hotel (padres), tiene sentido que incluyas la lista de reservas que pertenecen a ese vuelo o hotel.
+
+    Cuando serializas una Reserva (hija), tiene sentido que muestres el vuelo y el hotel asociados, pero no necesariamente todas las reservas que hay en ese vuelo o hotel porque eso puede generar un bucle infinito (serializar reserva → vuelo → reservas → reserva → …).
+
+Por eso, en Jackson:
+
+    @JsonManagedReference va en la propiedad del padre que tiene la lista de hijos.
+
+    @JsonBackReference va en la propiedad del hijo que apunta al padre, para romper la recursión.

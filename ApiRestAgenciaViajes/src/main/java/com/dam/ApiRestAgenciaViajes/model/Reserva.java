@@ -1,5 +1,6 @@
 package com.dam.ApiRestAgenciaViajes.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -35,11 +36,11 @@ public class Reserva {
 
         Especifica que la columna en la tabla reserva se llama vuelo_asociado, y es una clave foránea (foreign key) que apunta al ID del vuelo.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vuelo_asociado")
     private Vuelo vueloAsociado;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hotel_asociado")
     private Hotel hotelAsociado;
 

@@ -22,8 +22,6 @@ public interface HotelService {
 
     public Hotel actualizarHotel(Long id, Hotel hotel);
 
-    public Hotel eliminarHotelPorId(Long id);
-
-    public Hotel eliminarHotelPorNombre(String nombre);
+    public void eliminarHotelPorId(Long id);
 
 }

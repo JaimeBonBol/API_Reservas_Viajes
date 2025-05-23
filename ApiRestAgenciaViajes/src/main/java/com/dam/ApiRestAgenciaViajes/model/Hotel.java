@@ -1,5 +1,7 @@
 package com.dam.ApiRestAgenciaViajes.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -8,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "hotel")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +30,7 @@ public class Hotel {
     private Boolean disponibilidad = false;
 
     @OneToMany(mappedBy = "hotelAsociado")
+    @JsonIgnore
     private Set<Reserva> reservas = new LinkedHashSet<>();
 
     public Long getId() {
