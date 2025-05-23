@@ -1,6 +1,7 @@
 package com.dam.ApiRestAgenciaViajes.service;
 
 import com.dam.ApiRestAgenciaViajes.model.Hotel;
+import com.dam.ApiRestAgenciaViajes.model.Vuelo;
 import com.dam.ApiRestAgenciaViajes.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -59,7 +60,11 @@ public class HotelServiceImpl implements HotelService {
      */
     @Override
     public Hotel buscarHotelPorId(Long id) {
-        return hotelRepository.obtenerHotelPorId(id);
+        Hotel hotelExistente = hotelRepository.obtenerHotelPorId(id);
+        if (hotelExistente == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Hotel no encontrado");
+        }
+        return hotelExistente;
     }
 
     /**
@@ -69,7 +74,12 @@ public class HotelServiceImpl implements HotelService {
      */
     @Override
     public Hotel buscarHotelporNombre(String nombre) {
-        return hotelRepository.obtenerHotelPorNombre(nombre);
+        Hotel hotelExistente = hotelRepository.obtenerHotelPorNombre(nombre);
+        if (hotelExistente == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Hotel no encontrado");
+        }
+
+        return hotelExistente;
     }
 
     /**
@@ -90,6 +100,10 @@ public class HotelServiceImpl implements HotelService {
      */
     @Override
     public Hotel actualizarHotel(Long id, Hotel hotel) {
+        Hotel hotelExistente = hotelRepository.obtenerHotelPorId(id);
+        if (hotelExistente == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Hotel no encontrado");
+        }
         return hotelRepository.actualizarHotel(id, hotel);
     }
 
@@ -101,10 +115,12 @@ public class HotelServiceImpl implements HotelService {
      */
     @Override
     public Hotel eliminarHotelPorId(Long id) {
-        Hotel hotelEliminado = hotelRepository.eliminarHotelPorId(id);
+        Hotel hotelEliminado = hotelRepository.obtenerHotelPorId(id);
         if (hotelEliminado == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Hotel no encontrado");
         }
+
+        hotelRepository.eliminarHotelPorId(id);
 
         return hotelEliminado;
     }
@@ -117,10 +133,12 @@ public class HotelServiceImpl implements HotelService {
      */
     @Override
     public Hotel eliminarHotelPorNombre(String nombre) {
-        Hotel hotelEliminado = hotelRepository.eliminarHotelPorNombre(nombre);
+        Hotel hotelEliminado = hotelRepository.obtenerHotelPorNombre(nombre);
         if (hotelEliminado == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Hotel no encontrado");
         }
+
+        hotelRepository.eliminarHotelPorNombre(nombre);
 
         return hotelEliminado;
     }

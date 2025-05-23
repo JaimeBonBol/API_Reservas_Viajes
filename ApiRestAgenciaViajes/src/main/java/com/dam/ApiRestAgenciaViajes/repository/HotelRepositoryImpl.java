@@ -79,11 +79,12 @@ public class HotelRepositoryImpl implements HotelRepository{
      * @return Hotel eliminado.
      */
     public Hotel eliminarHotelPorId(Long id) {
-        Hotel hotelEliminar = hotelJPASpringData.findById(id).orElse(null);
+        /*Hotel hotelEliminar = hotelJPASpringData.findById(id).orElse(null);
         if (hotelEliminar != null) {
             hotelJPASpringData.delete(hotelEliminar);
         }
-        return hotelEliminar;
+        return hotelEliminar;*/
+        return hotelJPASpringData.deleteHotelById(id);
     }
 
     /**
@@ -94,10 +95,11 @@ public class HotelRepositoryImpl implements HotelRepository{
      */
     @Override
     public Hotel eliminarHotelPorNombre(String nombre) {
-        Hotel hotelEliminar = hotelJPASpringData.findByNombre(nombre).orElse(null);
+        /*Hotel hotelEliminar = hotelJPASpringData.findByNombre(nombre).orElse(null);
         if (hotelEliminar != null) {
             hotelJPASpringData.delete(hotelEliminar);
         }
-        return hotelEliminar;
+        return hotelEliminar;*/
+        return hotelJPASpringData.deleteHotelByNombre(nombre);
     }
 }

@@ -69,10 +69,11 @@ public class ReservaRepositoryImpl implements ReservaRepository {
      */
     @Override
     public Reserva eliminarReserva(Long id) {
-        Reserva reservaEliminar = reservaJPASpringData.findById(id).orElse(null);
+        /*Reserva reservaEliminar = reservaJPASpringData.findById(id).orElse(null);
         if (reservaEliminar != null) {
             reservaJPASpringData.deleteById(id);
         }
-        return reservaEliminar;
+        return reservaEliminar;*/
+        return reservaJPASpringData.deleteReservaById(id);
     }
 }
