@@ -27,6 +27,20 @@ public class Vuelo {
     @Column(name = "plazas_disponibles", nullable = false)
     private Integer plazasDisponibles;
 
+    /*Aclaraciones
+    @OneToMany: Un vuelo puede tener muchas reservas.
+
+    mappedBy = "vueloAsociado": significa que no se crea otra columna extra en la tabla.
+    Le estás diciendo que la relación ya se mapea desde el lado de Reserva usando el atributo vueloAsociado.
+
+    new LinkedHashSet<>()
+
+    Esto asegura que si más tarde haces vuelo.getReservas(), la colección ya existe y no tendrás un NullPointerException.
+
+    No usas una List porque los Set son más adecuados para relaciones donde no quieres elementos duplicados (dos veces la misma reserva en el mismo vuelo no tiene sentido).
+
+    LinkedHashSet además da la ventaja de preservar el orden de llegada, lo cual puede ser útil si muestras las reservas en orden de creación.
+     */
     @OneToMany(mappedBy = "vueloAsociado")
     private Set<Reserva> reservas = new LinkedHashSet<>();
 

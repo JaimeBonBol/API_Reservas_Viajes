@@ -16,6 +16,25 @@ public class Reserva {
     @Column(name = "dni", nullable = false, length = 20)
     private String dni;
 
+    /*Aclaraciones
+    ¿Qué significa?
+
+    @ManyToOne: muchas reservas pueden estar asociadas al mismo vuelo.
+
+        Ejemplo: 50 personas pueden reservar el vuelo 1234. Cada reserva es un objeto diferente, pero todos apuntan al mismo vuelo.
+
+    fetch = FetchType.LAZY:
+
+        El vuelo no se carga automáticamente cuando consultas la reserva.
+
+        Se carga solo si haces .getVueloAsociado().
+
+        Esto mejora el rendimiento y evita traer datos innecesarios si no los vas a usar.
+
+    @JoinColumn(name = "vuelo_asociado"):
+
+        Especifica que la columna en la tabla reserva se llama vuelo_asociado, y es una clave foránea (foreign key) que apunta al ID del vuelo.
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vuelo_asociado")
     private Vuelo vueloAsociado;
