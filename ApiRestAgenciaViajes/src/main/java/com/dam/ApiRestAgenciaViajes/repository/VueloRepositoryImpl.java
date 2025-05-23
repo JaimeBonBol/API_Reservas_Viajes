@@ -62,12 +62,17 @@ public class VueloRepositoryImpl implements VueloRepository{
     }
 
     /**
-     * Método apra eliminar un vuelo por id.
+     * Método apra eliminar un vuelo por id. Obtiene el vuelo e aliminar a partir del id
+     * y si este no es null lo elimina.
      * @param id Id del vuelo que se desea eliminar.
      * @return El vuelo eliminado.
      */
     @Override
     public Vuelo eliminarVuelo(Long id) {
-        return vueloJPASpringData.deleteVueloById(id);
+        Vuelo vueloEliminar = vueloJPASpringData.findById(id).orElse(null);
+        if (vueloEliminar != null) {
+            vueloJPASpringData.delete(vueloEliminar);
+        }
+        return vueloEliminar;
     }
 }

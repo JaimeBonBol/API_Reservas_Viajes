@@ -62,12 +62,17 @@ public class ReservaRepositoryImpl implements ReservaRepository {
     }
 
     /**
-     * Método para eliminar una reservpor su id.
+     * Método para eliminar una reservpor su id.Obtiene la resrerva a eliminar a partir del
+     * id  y si este no es null lo elimina.
      * @param id Id de la resrva a eliminar.
      * @return Reserva eliminada.
      */
     @Override
     public Reserva eliminarReserva(Long id) {
-        return reservaJPASpringData.deleteReservaById(id);
+        Reserva reservaEliminar = reservaJPASpringData.findById(id).orElse(null);
+        if (reservaEliminar != null) {
+            reservaJPASpringData.deleteById(id);
+        }
+        return reservaEliminar;
     }
 }
