@@ -78,13 +78,13 @@ public class HotelRepositoryImpl implements HotelRepository{
      * @param id Id del hotel a eliminar.
      * @return Hotel eliminado.
      */
-    public Hotel eliminarHotelPorId(Long id) {
+    public void eliminarHotelPorId(Long id) {
         /*Hotel hotelEliminar = hotelJPASpringData.findById(id).orElse(null);
         if (hotelEliminar != null) {
             hotelJPASpringData.delete(hotelEliminar);
         }
         return hotelEliminar;*/
-        return hotelJPASpringData.deleteHotelById(id);
+        hotelJPASpringData.deleteById(id);
     }
 
     /**

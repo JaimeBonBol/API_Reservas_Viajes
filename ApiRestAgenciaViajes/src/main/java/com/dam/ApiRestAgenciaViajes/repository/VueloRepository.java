@@ -17,6 +17,6 @@ public interface VueloRepository {
 
     public Vuelo actualizarVuelo(Long id, Vuelo vuelo);
 
-    public Vuelo eliminarVuelo(Long id);
+    public void eliminarVuelo(Long id);
 
 }

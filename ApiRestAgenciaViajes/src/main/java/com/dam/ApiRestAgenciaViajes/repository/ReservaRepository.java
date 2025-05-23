@@ -17,6 +17,6 @@ public interface ReservaRepository {
 
     public Reserva actualizarReserva(Long id, Reserva reserva);
 
-    public Reserva eliminarReserva(Long id);
+    public void eliminarReserva(Long id);
 
 }

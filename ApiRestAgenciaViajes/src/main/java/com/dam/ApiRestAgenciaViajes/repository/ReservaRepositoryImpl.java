@@ -68,12 +68,12 @@ public class ReservaRepositoryImpl implements ReservaRepository {
      * @return Reserva eliminada.
      */
     @Override
-    public Reserva eliminarReserva(Long id) {
+    public void eliminarReserva(Long id) {
         /*Reserva reservaEliminar = reservaJPASpringData.findById(id).orElse(null);
         if (reservaEliminar != null) {
             reservaJPASpringData.deleteById(id);
         }
         return reservaEliminar;*/
-        return reservaJPASpringData.deleteReservaById(id);
+        reservaJPASpringData.deleteById(id);
     }
 }

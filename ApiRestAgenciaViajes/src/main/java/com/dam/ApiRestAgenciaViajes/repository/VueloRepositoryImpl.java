@@ -68,12 +68,12 @@ public class VueloRepositoryImpl implements VueloRepository{
      * @return El vuelo eliminado.
      */
     @Override
-    public Vuelo eliminarVuelo(Long id) {
+    public void eliminarVuelo(Long id) {
         /*Vuelo vueloEliminar = vueloJPASpringData.findById(id).orElse(null);
         if (vueloEliminar != null) {
             vueloJPASpringData.delete(vueloEliminar);
         }
         return vueloEliminar;*/
-        return vueloJPASpringData.deleteVueloById(id);
+        vueloJPASpringData.deleteById(id);
     }
 }
