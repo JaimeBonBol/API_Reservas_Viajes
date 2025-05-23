@@ -14,7 +14,7 @@ import java.util.List;
 public class HotelRepositoryImpl implements HotelRepository{
 
     /**
-     * Atributo de la interfaz HotelJpaSpringData para utilizar los metodos
+     * Atributo autoinyectado de la interfaz HotelJpaSpringData para utilizar los metodos
      * de comunicación con la base de datos.
      */
     @Autowired
@@ -37,7 +37,7 @@ public class HotelRepositoryImpl implements HotelRepository{
      */
     @Override
     public Hotel obtenerHotelPorId(Long id) {
-        return hotelJPASpringData.findById(id).get();
+        return hotelJPASpringData.findById(id).orElse(null);
     }
 
     /**
