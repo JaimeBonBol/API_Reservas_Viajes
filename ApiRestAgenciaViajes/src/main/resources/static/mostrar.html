@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mostrar Entidades</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mostrar.css">
+</head>
+<body>
+
+    <div class="cabecera">
+        <h1>Datos registrados en la Base de Datos</h1>
+        <a href="index.html" class="home-btn">Home</a>
+    </div>
+
+    <div class="section">
+        <h2>Hoteles</h2>
+        <button id="btnMostrarHoteles">Mostrar Hoteles</button>
+        <button id="btnOcultarHoteles">Ocultar Hoteles</button>
+        <ul id="listaHoteles" style="display:none;"></ul>
+    </div>
+
+    <div class="section">
+        <h2>Vuelos</h2>
+        <button id="btnMostrarVuelos">Mostrar Vuelos</button>
+        <button id="btnOcultarVuelos">Ocultar Vuelos</button>
+        <ul id="listaVuelos" style="display:none;"></ul>
+    </div>
+
+    <div class="section">
+        <h2>Reservas</h2>
+        <button id="btnMostrarReservas">Mostrar Reservas</button>
+        <button id="btnOcultarReservas">Ocultar Reservas</button>
+        <ul id="listaReservas" style="display:none;"></ul>
+    </div>
+
+    <script src="appMostrar.js"></script>
+
+</body>
+</html>

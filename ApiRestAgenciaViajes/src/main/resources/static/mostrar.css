@@ -1,0 +1,102 @@
+/* Cabecera (mostrar.html) */
+.cabecera {
+    position: relative;
+    height: 120px;
+    color: white;
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    align-items: center;     /* centra verticalmente */
+    padding: 0 40px;
+    text-align: center;
+    margin-bottom: 50px;
+    width: 95vw;
+    border-radius: 16px;
+}
+
+.cabecera h1 {
+    font-size: 3.1rem;
+    margin: 0;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Botón home en cabecera */
+.home-btn {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #27ae60;
+    padding: 12px 24px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.6);
+}
+
+.home-btn:hover{
+    background-color: #1e8449;
+    box-shadow: 0 8px 18px rgba(30, 132, 73, 0.8);
+}
+
+/* Secciones que muestran información */
+.section {
+    background: white;
+    max-width: 900px;
+    width: 90%;
+    margin: 0 auto 40px;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    color: #2c3e50;
+    font-weight: 500;
+    user-select: text;
+}
+
+.section h2 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 12px 20px;
+    margin: 10px 6px 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.25s, box-shadow 0.25s;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(41, 128, 185, 0.5);
+    user-select: none;
+}
+
+button:hover{
+    background-color: #0056b3;
+    box-shadow: 0 8px 20px rgba(28, 89, 128, 0.75);
+    outline: none;
+}
+
+/* Listas dentro de mostrar.html */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+ul li {
+    background-color: #ecf0f1;
+    margin: 8px 0;
+    padding: 14px 18px;
+    border-radius: 10px;
+    color: #34495e;
+    font-weight: 600;
+    box-shadow: inset 0 0 6px #d6dbdf;
+    user-select: text;
+}
