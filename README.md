@@ -1,228 +1,197 @@
-﻿\# API REST Agencia de Viajes
+﻿# API REST - Sistema de Reservas de una Agencia de Viajes
 
-API para gestionar reservas de vuelos y hoteles en una agencia de viajes.
+Esta es una API RESTful desarrollada como una aplicación monolítica utilizando **Spring Boot**, 
+**Spring Data JPA** y una base de datos relacional (**PostgreSQL** o **MySQL**).
 
-Permite crear, consultar, modificar y eliminar reservas, vuelos y hoteles.
+La API permite gestionar reservas de viajes, asociando vuelos y hoteles disponibles.  
+Se implementan operaciones REST para consultar vuelos y hoteles, así como para crear y consultar reservas.
 
-\---
+---
 
-\## Tecnologías usadas
+## 🛠️ Tecnologías utilizadas
 
-- Java 17+
+- Java 21
 - Spring Boot
-- Hibernate / JPA
-- Base de datos relacional (H2, MySQL, PostgreSQL, etc.)
+- Spring Data JPA
+- MySQL
 
-\---
+## Para ejecutar el proyecto
 
-\## Cómo ejecutar el proyecto
+1. [Enlace al repositorio](https://github.com/JaimeBonBol/Primer_MicroServicio)
+2. Clonar el repositorio:
+```bash
 
-1. Clona el repositorio:
+git clone https://github.com/JaimeBonBol/Primer_MicroServicio.git
 
-\```bash
+```
+> **Nota:**
+> Recuerda configurar tu base de datos en `application.properties`
 
-git clone https://github.com/tu\_usuario/ApiRestAgenciaViajes.git
+---
 
-cd ApiRestAgenciaViajes
+## Entidades y sus Atributos
 
-Configura la base de datos en application.properties.
+### 🏨 Hotel
+Representa un hotel disponible para reserva.
 
-La API estará disponible en http://localhost:8080/api.
+- `id` (Long) Identificador único generado automáticamente.
+- `nombre` (String) Nombre del hotel.
+- `categoria` (String) Categoría o clasificación del hotel (ej. "4 estrellas").
+- `precio` (BigDecimal) Precio por noche en formato decimal.
+- `disponibilidad` (Boolean) Indica si el hotel está disponible para reservas.
 
-Endpoints y ejemplos de uso
 
-Entidad: Reservas
 
-Método	Endpoint	Descripción
+### ✈️ Vuelo
+Representa un vuelo disponible para reserva.
 
-GET	/api/reservas	Obtener todas las reservas
+- `id` (Long) Identificador único generado automáticamente.
+- `compania` (String) Nombre de la compañía aérea.
+- `fecha` (LocalDate) Fecha del vuelo (sin hora).
+- `precio` (BigDecimal) Precio del vuelo en formato decimal.
+- `plazasDisponibles` (Integer) Número de plazas disponibles para reserva.
 
-GET	/api/reservas/{id}	Obtener reserva por ID
 
-POST	/api/reservas	Crear una nueva reserva
 
-PUT	/api/reservas/{id}	Actualizar reserva por ID
+### 📄 Reserva
+Representa una reserva realizada por un usuario, vinculada a un vuelo y a un hotel.
 
-DELETE	/api/reservas/{id}	Eliminar reserva por ID
+- `id` (Long) Identificador único generado automáticamente.
+- `usuario` (String) Nombre del usuario que realiza la reserva.
+- `dni` (String) DNI o identificación del usuario.
+- `vueloAsociado` (Vuelo) Vuelo reservado (relación ManyToOne).
+- `hotelAsociado` (Hotel) Hotel reservado (relación ManyToOne).
 
-Ejemplos
+---
 
-GET /api/reservas
+> **Nota:**  
+> Al crear una reserva, se verifica que el vuelo tenga plazas disponibles. Si no quedan plazas, la API devuelve un error y no se permite crear la reserva.
 
-Obtiene una lista con todas las reservas existentes.
+---
 
-GET /api/reservas/5
+## 📦 Requisitos y funcionalidades principales
 
-Obtiene la reserva con ID 5.
+Esta API REST implementa una solución de gestión de reservas en una agencia de viajes.  
+Los principales requisitos funcionales son:
 
-POST /api/reservas
+- Aplicación monolítica con arquitectura por capas.
+- Gestión de tres entidades: **Hotel**, **Vuelo** y **Reserva**.
+- Las reservas se vinculan a un **vuelo** y a un **hotel**.
+- No se permite crear una reserva en vuelos sin plazas disponibles y hoteles sin disponibilidad.
 
-Crea una nueva reserva.
+---
 
-Body JSON ejemplo:
+## 📂 Estructiura del proyecto
 
+El proyecto está dividido en los siguientes paquetes:
+
+````text
+│
+├── controller/    # Controladores REST (exponen los endpoints)
+├── service/       # Lógica de negocio
+├── repository/    # Interfaces de acceso a datos (Spring Data JPA)
+└── model/         # Entidades JPA (Hotel, Vuelo, Reserva)
+````
+
+---
+
+## 📡 Endpoints de la API
+
+### Hotel
+
+| Método | Endpoint                     | Descripción                                     | Body requerido |
+|--------|------------------------------|-------------------------------------------------|----------------|
+| GET    | `/api/hoteles`               | Listar todos los hoteles                        | ❌ No           |
+| GET    | `/api/hoteles/disponibles`   | Listar hoteles con habitaciones disponibles     | ❌ No           |
+| GET    | `/api/hoteles/id/{id}`       | Buscar hotel por ID                             | ❌ No           |
+| GET    | `/api/hoteles/nombre/{nombre}` | Buscar hotel por nombre                         | ❌ No           |
+| POST   | `/api/hoteles`               | Crear un nuevo hotel                            | ✅ Sí           |
+| PUT    | `/api/hoteles/{id}`          | Actualizar datos de un hotel                    | ✅ Sí           |
+| DELETE | `/api/hoteles/{id}`          | Eliminar un hotel por ID                        | ❌ No           |
+
+
+Ejemplo de RequestBody:
+
+```json
 {
-
-"usuario": "Juan Martínez",
-
-"dni": "12345678A",
-
-"vueloAsociado": { "id": 1 },
-
-"hotelAsociado": { "id": 2 }
-
+  "nombre": "Hotel Rio",
+  "categoria": "5 estrellas",
+  "precio": 168.50,
+  "disponibilidad": true
 }
+```
 
-PUT /api/reservas/5
 
-Actualiza la reserva con ID 5.
+### Vuelo
 
-Body JSON ejemplo:
+| Método | Endpoint                      | Descripción                                     | Body requerido |
+|--------|-------------------------------|-------------------------------------------------|----------------|
+| GET    | `/api/vuelos`                 | Listar todos los vuelos                         | ❌ No           |
+| GET    | `/api/vuelos/disponibles`     | Listar vuelos con plazas disponibles            | ❌ No           |
+| GET    | `/api/vuelos/{id}`            | Buscar vuelo por ID                             | ❌ No           |
+| POST   | `/api/vuelos`                 | Crear un nuevo vuelo                            | ✅ Sí           |
+| PUT    | `/api/vuelos/{id}`            | Actualizar datos de un vuelo                    | ✅ Sí           |
+| DELETE | `/api/vuelos/{id}`            | Eliminar un vuelo por ID                        | ❌ No           |
 
+
+Ejemplo de RequestBody:
+```json
 {
-
-"usuario": "Juan Martínez",
-
-"dni": "12345678A",
-
-"vueloAsociado": { "id": 1 },
-
-"hotelAsociado": { "id": 3 }
-
+  "compania": "Ier",
+  "fecha": "2025-04-12",
+  "precio": 97.50,
+  "plazasDisponibles": 150
 }
+```
 
-DELETE /api/reservas/5
+### Reserva
 
-Elimina la reserva con ID 5.
+| Método | Endpoint                  | Descripción                                     | Body requerido |
+|--------|---------------------------|-------------------------------------------------|----------------|
+| GET    | `/api/reservas`           | Listar todas las reservas                       | ❌ No           |
+| GET    | `/api/reservas/{id}`      | Buscar reserva por ID                           | ❌ No           |
+| POST   | `/api/reservas`           | Crear una nueva reserva (requiere hotel y vuelo)| ✅ Sí           |
+| PUT    | `/api/reservas/{id}`      | Actualizar una reserva existente                | ✅ Sí           |
+| DELETE | `/api/reservas/{id}`      | Eliminar una reserva por ID                     | ❌ No           |
 
-Entidad: Vuelos
 
-Método	Endpoint	Descripción
-
-GET	/api/vuelos	Obtener todos los vuelos
-
-GET	/api/vuelos/{id}	Obtener vuelo por ID
-
-POST	/api/vuelos	Crear un vuelo
-
-PUT	/api/vuelos/{id}	Actualizar vuelo por ID
-
-DELETE	/api/vuelos/{id}	Eliminar vuelo por ID
-
-Ejemplos
-
-GET /api/vuelos
-
-Obtiene todos los vuelos disponibles.
-
-GET /api/vuelos/1
-
-Obtiene el vuelo con ID 1.
-
-POST /api/vuelos
-
-Crea un nuevo vuelo.
-
-Body JSON ejemplo:
-
+Ejemplo de RequestBody:
+```json
 {
-
-"compania": "Iberia",
-
-"fecha": "2025-07-15T10:00:00",
-
-"precio": 199.99,
-
-"plazasDisponibles": 150
-
+  "usuario": "Juan Martínez",
+  "dni": "12345678A",
+  "vueloAsociado": { "id": 1 },
+  "hotelAsociado": { "id": 2 }
 }
+```
 
-PUT /api/vuelos/1
+---
 
-Actualiza el vuelo con ID 1.
+## 🌐 Vista / Interfaz de Usuario
 
-Body JSON ejemplo:
+La aplicación cuenta con una interfaz gráfica web para mostrar los hoteles, los vuelos
+y las reservas de la base de datos.
 
-{
+### ¿Cóomo acceder?
 
-"compania": "Iberia",
+La vista está despelgada en `http://localhost:8080/index.html`
 
-"fecha": "2025-07-15T12:00:00",
+---
 
-"precio": 210.00,
+## 🙋‍♂️ Sobre este proyecto
 
-"plazasDisponibles": 140
+Este proyecto ha sido mi **primera experiencia desarrollando una API REST**, aplicando una arquitectura por capas y buenas prácticas con **Spring Boot** y **JPA**.  
+He aprendido mucho sobre el diseño de entidades, relaciones, validaciones y la exposición de endpoints.
 
-}
+### 💬 ¿Tienes sugerencias o mejoras?
 
-DELETE /api/vuelos/1
+Estoy totalmente abierto a:
 
-Elimina el vuelo con ID 1.
+- Consejos sobre buenas prácticas o mejoras de diseño.
+- Ideas para extender la funcionalidad (por ejemplo, autenticación, paginación, etc.).
+- Feedback en general sobre la estructura del código, organización del proyecto o estilo de documentación.
 
-Entidad: Hoteles
+Puedes contactarme si tienes alguna recomendación.  
+¡Toda sugerencia es bienvenida y valiosa para seguir aprendiendo!
 
-Método	Endpoint	Descripción
-
-GET	/api/hoteles	Obtener todos los hoteles
-
-GET	/api/hoteles/{id}	Obtener hotel por ID
-
-POST	/api/hoteles	Crear un hotel
-
-PUT	/api/hoteles/{id}	Actualizar hotel por ID
-
-DELETE	/api/hoteles/{id}	Eliminar hotel por ID
-
-Ejemplos
-
-GET /api/hoteles
-
-Obtiene todos los hoteles disponibles.
-
-GET /api/hoteles/2
-
-Obtiene el hotel con ID 2.
-
-POST /api/hoteles
-
-Crea un nuevo hotel.
-
-Body JSON ejemplo:
-
-{
-
-"nombre": "Hotel Gran Plaza",
-
-"direccion": "Calle Mayor 123",
-
-"categoria": 4,
-
-"precioNoche": 89.99,
-
-"habitacionesDisponibles": 20
-
-}
-
-PUT /api/hoteles/2
-
-Actualiza el hotel con ID 2.
-
-Body JSON ejemplo:
-
-{
-
-"nombre": "Hotel Gran Plaza",
-
-"direccion": "Calle Mayor 123",
-
-"categoria": 5,
-
-"precioNoche": 95.00,
-
-"habitacionesDisponibles": 18
-
-}
-
-DELETE /api/hoteles/2
-
-Elimina el hotel con ID 2.
+---
