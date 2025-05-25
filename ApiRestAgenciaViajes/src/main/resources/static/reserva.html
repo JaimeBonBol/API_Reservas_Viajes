@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="reserva.css">
+</head>
+<body>
+
+    <div class="cabecera">
+        <h1>Operaciones Reservas</h1>
+        <a href="index.html" class="home-btn">Home</a>
+    </div>
+
+    <div class="section">
+        <h2>Crear reserva</h2>
+        <form id="formCrearReserva">
+            <input type="text" id="usuarioReserva" placeholder="Nombre de usuario" required />
+            <input type="text" id="dniReserva" placeholder="DNI usuario" required />
+            <input type="number" id="idVueloReserva" placeholder="ID del vuelo" required />
+            <input type="number" id="idHotelReserva" placeholder="ID del hotel" required />
+            <button type="submit">Crear Reserva</button>
+        </form>
+    </div>
+
+    <div class="section">
+        <h2>Actualizar Reserva</h2>
+        <form id="formActualizarReserva">
+            <input type="number" id="idReservaActualizar" placeholder="ID de la reserva" required />
+            <input type="text" id="usuarioReservaActualizar" placeholder="Nombre de usuario" required />
+            <input type="text" id="dniReservaActualizar" placeholder="DNI usuario" required />
+            <input type="number" id="idVueloReservaActualizar" placeholder="ID del vuelo" required />
+            <input type="number" id="idHotelReservaActualizar" placeholder="ID del hotel" required />
+            <button type="submit">Actualizar Reserva</button>
+        </form>
+    </div>
+
+    <div class="section">
+        <h2>Eliminar Reserva</h2>
+        <form id="formEliminarReserva">
+            <input type="number" id="idReservaEliminar" placeholder="ID de la reserva" required />
+            <button type="submit">Eliminar Reserva</button>
+        </form>
+    </div>
+
+    <script src="appReserva.js"></script>
+</body>
+</html>

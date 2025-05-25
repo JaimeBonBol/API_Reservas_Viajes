@@ -18,7 +18,7 @@ public class ReservaServiceImpl implements ReservaService {
     private ReservaRepository reservaRepository;
 
     @Autowired
-    private VueloService vueloService;  // usa la lógica de negocio completa del vuelo
+    private VueloService vueloService;  // Para usar la lógica de negocio completa del vuelo
 
     @Autowired
     private HotelService hotelService;
@@ -70,9 +70,20 @@ public class ReservaServiceImpl implements ReservaService {
     @Override
     public Reserva actualizarReserva(Long id, Reserva reserva) {
         Reserva reservaExistente = reservaRepository.obtenerReservaPorId(id);
+        Vuelo vueloReserva = vueloService.buscarVueloPorId(reserva.getVueloAsociado().getId());
+        Hotel hotelReserva = hotelService.buscarHotelPorId(reserva.getHotelAsociado().getId());
 
         if (reservaExistente == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Vuelo no encontrado");
+        }
+
+        // Se compreuba si hay plazas disponibles.
+        if (vueloReserva.getPlazasDisponibles() <= 0 ){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No hay plazas disponibles en el vuelo");
+        }
+
+        if (!hotelReserva.getDisponibilidad()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El hotel no está disponible");
         }
 
         return reservaRepository.actualizarReserva(id, reserva);
