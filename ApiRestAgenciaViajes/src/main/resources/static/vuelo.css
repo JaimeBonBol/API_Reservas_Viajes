@@ -1,0 +1,104 @@
+/* Cabecera (vuelo.html) */
+.cabecera {
+    /* estilos normales sin position fixed ni sticky */
+    height: 120px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    border-radius: 0 0 16px 16px;
+    margin-bottom: 50px;
+}
+
+.cabecera h1 {
+    font-size: 3.1rem;
+    margin: 0;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Botón home en cabecera */
+.home-btn {
+    position: absolute;
+    right: 40px;
+    transform: translateY(-50%);
+    background-color: #27ae60;
+    padding: 12px 24px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.6);
+}
+
+.home-btn:hover{
+    background-color: #1e8449;
+    box-shadow: 0 8px 18px rgba(30, 132, 73, 0.8);
+}
+
+/* Secciones que muestran información */
+.section {
+    background: white;
+    max-width: 900px;
+    width: 90%;
+    margin: 0 auto 40px;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    color: #2c3e50;
+    font-weight: 500;
+    user-select: text;
+}
+
+.section h2 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+/* Estilos específicos para el formulario de crear hotel */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="number"] {
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus {
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+
+form button[type="submit"] {
+    padding: 14px 22px;
+    background-color: #27ae60;
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.4);
+}
+
+form button[type="submit"]:hover {
+    background-color: #1e8449;
+    box-shadow: 0 6px 16px rgba(30, 132, 73, 0.6);
+}
