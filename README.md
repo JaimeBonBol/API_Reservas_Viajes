@@ -24,6 +24,9 @@ Se implementan operaciones REST para consultar vuelos y hoteles, así como para 
 git clone https://github.com/JaimeBonBol/Primer_MicroServicio.git
 
 ```
+3. Para ver y ejecutar desde la interfaz: **http://localhost:8080/index.html**
+4. Más abajo he dejado unas tablas con los endpoints para porbar en PostMan.
+
 > **Nota:**
 > Recuerda configurar tu base de datos en `application.properties`
 
