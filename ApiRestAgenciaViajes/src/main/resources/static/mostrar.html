@@ -15,20 +15,48 @@
 
     <div class="section">
         <h2>Hoteles</h2>
+        <h3>Buscar Hotel por ID</h3>
+        <input type="number" id="inputHotelId" placeholder="Introduce el ID del hotel">
+        <button id="btnBuscarHotelPorId">Buscar</button>
+        <div id="resultadoHotelPorId"></div>
+
+        <h3>Buscar Hotel por Nombre</h3>
+        <input type="text" id="inputHotelNombre" placeholder="Introduce el nombre del hotel">
+        <button id="btnBuscarHotelPorNombre">Buscar</button>
+        <div id="resultadoHotelPorNombre"></div>
+
         <button id="btnMostrarHoteles">Mostrar Hoteles</button>
         <button id="btnOcultarHoteles">Ocultar Hoteles</button>
         <ul id="listaHoteles" style="display:none;"></ul>
+
+        <button id="btnMostrarHotelesDisponibles">Mostrar Hoteles Disponibles</button>
+        <button id="btnOcultarHotelesDisponibles">Ocultar Hoteles Disponibles</button>
+        <ul id="listaHotelesDisponibles" style="display:none;"></ul>
     </div>
 
     <div class="section">
         <h2>Vuelos</h2>
+        <h3>Buscar Vuelo por ID</h3>
+        <input type="number" id="inputVueloId" placeholder="Introduce el ID del vuelo">
+        <button id="btnBuscarVueloPorId">Buscar</button>
+        <div id="resultadoVueloPorId"></div>
+
         <button id="btnMostrarVuelos">Mostrar Vuelos</button>
         <button id="btnOcultarVuelos">Ocultar Vuelos</button>
         <ul id="listaVuelos" style="display:none;"></ul>
+
+        <button id="btnMostrarVuelosDisponibles">Mostrar Vuelos con Plazas Disponibles</button>
+        <button id="btnOcultarVuelosDisponibles">Ocultar Vuelos con Plazas Disponibles</button>
+        <ul id="listaVuelosDisponibles" style="display:none;"></ul>
     </div>
 
     <div class="section">
         <h2>Reservas</h2>
+        <h3>Buscar Reserva por ID</h3>
+        <input type="number" id="inputReservaId" placeholder="Introduce el ID de la reserva">
+        <button id="btnBuscarReservaPorId">Buscar</button>
+        <div id="resultadoReservaPorId"></div>
+
         <button id="btnMostrarReservas">Mostrar Reservas</button>
         <button id="btnOcultarReservas">Ocultar Reservas</button>
         <ul id="listaReservas" style="display:none;"></ul>
