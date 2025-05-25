@@ -10,9 +10,10 @@ function mostrarHoteles() {
 
                 // Aquí creamos un div o lista con cada propiedad separada
                 li.innerHTML = `
-                    <strong>${hotel.nombre}</strong><br/>
-                    Categoría: ${hotel.categoria}<br/>
-                    Precio por noche: <span class="precio">${hotel.precio}€</span>
+                    <strong>ID: ${hotel.id}</strong><br/>
+                    <span class="hotel-nombre"><strong>${hotel.nombre}</strong></span><br/>
+                    <span class="hotel-categoria">Categoría: ${hotel.categoria}</span><br/>
+                    <span class="hotel-precio">Precio por noche: ${hotel.precio}€</span><br/>
                 `;
 
                 lista.appendChild(li);
@@ -41,10 +42,11 @@ function mostrarVuelos() {
                 const li = document.createElement('li');
 
                 li.innerHTML = `
-                    <strong>${vuelo.compania}</strong><br/>
-                    Fecha: ${vuelo.fecha}<br/>
-                    Precio: <span class="precio">${vuelo.precio}€</span><br/>
-                    Plazas disponibles: ${vuelo.plazasDisponibles}
+                    <strong>ID: ${vuelo.id}</strong><br/>
+                    <span class="vuelo-compania">${vuelo.compania}</span><br/>
+                    <span class="vuelo-fecha">Fecha: ${vuelo.fecha}</span><br/>
+                    <span class="vuelo-precio">Precio: ${vuelo.precio}€</span><br/>
+                    <span class="vuelo-plazas">Plazas disponibles: ${vuelo.plazasDisponibles}</span>
                 `;
 
                 lista.appendChild(li);
@@ -71,9 +73,10 @@ function mostrarReservas() {
                 const li = document.createElement('li');
 
                 li.innerHTML = `
-                    <strong>${reserva.usuario}</strong> - DNI: ${reserva.dni}<br/>
-                    Vuelo: ${reserva.vueloAsociado?.id} (${reserva.vueloAsociado?.compania || 'N/A'})<br/>
-                    Hotel: ${reserva.hotelAsociado?.id} (${reserva.hotelAsociado?.nombre || 'N/A'})
+                    <span class="reserva-id">ID: ${reserva.id}</span><br/>
+                    <span class="reserva-usuario"><strong> ${reserva.usuario}</strong> - DNI: ${reserva.dni}</span><br/>
+                    <span class="reserva-vueloAsociado">Vuelo: ${reserva.vueloAsociado?.id} (${reserva.vueloAsociado?.compania || 'N/A'})</span><br/>
+                    <span class="reserva-hotelAsociado">Hotel: ${reserva.hotelAsociado?.id} (${reserva.hotelAsociado?.nombre || 'N/A'})</span><br/>
                 `;
 
                 lista.appendChild(li);

@@ -1,3 +1,5 @@
+//Crear hotel
+
 document.getElementById('formCrearHotel').addEventListener('submit', async (e) =>{
     e.preventDefault();
 
@@ -28,5 +30,78 @@ document.getElementById('formCrearHotel').addEventListener('submit', async (e) =
     }catch (error){
         console.error('Error: ',error);
         alert('Error en la conexión')
+    }
+});
+
+
+//Actualizar hotel.
+
+document.getElementById('formActualizarHotel').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const id = parseInt(document.getElementById('idHotelActualizar').value);
+    const datosActualizar = {};
+
+    const nombre = document.getElementById('nombreHotelActualizar').value;
+    if (nombre){
+        datosActualizar.nombre = nombre;
+    }
+
+    const categoria = document.getElementById('categoriaHotelActualizar').value;
+    if (categoria){
+        datosActualizar.categoria = categoria;
+    }
+
+    const precio = document.getElementById('precioHotelActualizar').value;
+    if (precio){
+        datosActualizar.precio = parseFloat(precio);
+    }
+
+    const disponibilidad = document.getElementById('disponibilidadHotelActualizar').checked;
+    if (disponibilidad){
+        datosActualizar.disponibilidad = disponibilidad;
+    }
+
+    try {
+        const respuesta = await fetch(`api/hoteles/${id}`, {
+           method: 'PUT',
+           headers: {'Content-Type': 'application/json'},
+           body: JSON.stringify(datosActualizar)
+        });
+
+        if (respuesta.ok){
+            alert('Hotel actualizado correctamente.');
+            e.target.reset();
+        }else {
+            alert('Error al actualizar el hotel.');
+        }
+    }catch (error){
+        console.error('Error: ', error);
+        alert('Error en la conexión.')
+    }
+});
+
+
+// Eliminar hotel
+
+document.getElementById('formEliminarHotel').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const id = document.getElementById('idHotelEliminar').value;
+
+    try {
+        const respuesta = await fetch(`api/hoteles/${id}`, {
+           method: `DELETE`
+        });
+
+        if (respuesta.ok){
+            alert('Hotel eliminado correctamente.');
+            e.target.reset();
+        }else {
+            alert('Error al eliminar el hotel.');
+        }
+    }catch (error){
+        console.error('Error: ', error);
+        alert('Error en la conexión.')
     }
 });
