@@ -29,7 +29,7 @@ body {
     gap: 25px;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 900px;
+    max-width: 1000px;
 }
 
 /* Botones / links de opciones */
