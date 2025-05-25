@@ -17,11 +17,11 @@ Se implementan operaciones REST para consultar vuelos y hoteles, así como para 
 
 ## Para ejecutar el proyecto
 
-1. [Enlace al repositorio](https://github.com/JaimeBonBol/Primer_MicroServicio)
+1. [Enlace al repositorio](https://github.com/JaimeBonBol/API_Reservas_Viajes)
 2. Clonar el repositorio:
 ```bash
 
-git clone https://github.com/JaimeBonBol/Primer_MicroServicio.git
+git clone https://github.com/JaimeBonBol/API_Reservas_Viajes.git
 
 ```
 3. Para ver y ejecutar desde la interfaz: **http://localhost:8080/index.html**
