@@ -22,7 +22,9 @@ document.getElementById('formCrearReserva').addEventListener('submit', async (e)
             alert('Reserva creada correctamente.')
             e.target.reset();
         }else {
-            alert('Error al crear la reserva.')
+            const errorData = await respuesta.json();
+            console.error("Respuesta de error (json):", errorData);
+            alert(`Error: ${errorData.message || 'Error desconocido'}`);
         }
     }catch (error) {
         console.error('Error: ', error)
@@ -68,7 +70,9 @@ document.getElementById('formActualizarReserva').addEventListener('submit', asyn
            alert('Reserva actualizada correctamente.')
            e.target.reset();
        }else {
-           alert('Error al actualizar la reserva.')
+           const errorData = await respuesta.json();
+           console.error("Respuesta de error (json):", errorData);
+           alert(`Error: ${errorData.message || 'Error desconocido'}`);
        }
    }catch (error) {
        console.error('Error: ',error)
@@ -91,7 +95,9 @@ document.getElementById('formEliminarReserva').addEventListener('submit', async 
             alert('Reserva eliminada correctamente.')
             e.target.reset();
         }else {
-            alert('Error al eliminar la reserva.')
+            const errorData = await respuesta.json();
+            console.error("Respuesta de error (json):", errorData);
+            alert(`Error: ${errorData.message || 'Error desconocido'}`);
         }
     }catch (error) {
         console.error('Error: ',error);

@@ -23,7 +23,9 @@ document.getElementById('formCrearVuelo').addEventListener('submit', async (e) =
             e.target.reset(); //vaciar los campos del formulario una vez que se ha enviado con éxito
 
         }else {
-            alert('Error al crear vuelo')
+            const errorData = await respuesta.json();
+            console.error("Respuesta de error (json):", errorData);
+            alert(`Error: ${errorData.message || 'Error desconocido'}`);
         }
     }catch (error){
         console.error('Error: ',error);
@@ -70,7 +72,9 @@ document.getElementById('formActualizarVuelo').addEventListener('submit', async 
             alert('Vuelo actualizado correctamente.');
             e.target.reset();
         }else {
-            alert('Error al actualizar el vuelo.');
+            const errorData = await respuesta.json();
+            console.error("Respuesta de error (json):", errorData);
+            alert(`Error: ${errorData.message || 'Error desconocido'}`);
         }
     }catch (error){
         console.error('Error: ', error);
@@ -94,7 +98,9 @@ document.getElementById('formEliminarVuelo').addEventListener('submit', async (e
             alert('Vuelo eliminado correctamente.');
             e.target.reset();
         }else {
-            alert('Error al eliminar el vuelo.');
+            const errorData = await respuesta.json();
+            console.error("Respuesta de error (json):", errorData);
+            alert(`Error: ${errorData.message || 'Error desconocido'}`);
         }
     }catch (error){
         console.error('Error: ', error);

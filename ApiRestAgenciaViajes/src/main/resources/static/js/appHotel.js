@@ -25,7 +25,9 @@ document.getElementById('formCrearHotel').addEventListener('submit', async (e) =
             e.target.reset(); //vaciar los campos del formulario una vez que se ha enviado con éxito
 
         }else {
-            alert('Error al crear hotel')
+            const errorData = await respuesta.json();
+            console.error("Respuesta de error (json):", errorData);
+            alert(`Error: ${errorData.message || 'Error desconocido'}`);
         }
     }catch (error){
         console.error('Error: ',error);
@@ -73,7 +75,9 @@ document.getElementById('formActualizarHotel').addEventListener('submit', async 
             alert('Hotel actualizado correctamente.');
             e.target.reset();
         }else {
-            alert('Error al actualizar el hotel.');
+            const errorData = await respuesta.json();
+            console.error("Respuesta de error (json):", errorData);
+            alert(`Error: ${errorData.message || 'Error desconocido'}`);
         }
     }catch (error){
         console.error('Error: ', error);
@@ -98,7 +102,9 @@ document.getElementById('formEliminarHotel').addEventListener('submit', async (e
             alert('Hotel eliminado correctamente.');
             e.target.reset();
         }else {
-            alert('Error al eliminar el hotel.');
+            const errorData = await respuesta.json();
+            console.error("Respuesta de error (json):", errorData);
+            alert(`Error: ${errorData.message || 'Error desconocido'}`);
         }
     }catch (error){
         console.error('Error: ', error);

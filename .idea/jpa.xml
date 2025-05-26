@@ -2,6 +2,7 @@
 <project version="4">
   <component name="JpaBuddyIdeaProjectConfig">
     <option name="reLastEntityCreationPackage" value="ApiRestAgenciaViajes/src/main/java/com/dam/ApiRestAgenciaViajes" />
+    <option name="renamerInitialized" value="true" />
     <option name="reverseEngineeringLastDbConnectionId" value="c69ae5bd-e484-48f5-a819-09292b2ae88a" />
   </component>
 </project>
