@@ -26,10 +26,11 @@ git clone https://github.com/JaimeBonBol/API_Reservas_Viajes.git
 ```
 3. Para ver y ejecutar desde la interfaz: **http://localhost:8080/index.html**
 4. Más abajo he dejado unas tablas con los endpoints para porbar en PostMan.
+5. Para la interfaz se debe ejecutar también el backend en el mismo host (localhost) y en el mismo puerto (8080).
+
 
 > **Nota:**
 > Recuerda configurar tu base de datos en `application.properties`
-
 ---
 
 ## Entidades y sus Atributos
@@ -89,11 +90,26 @@ Los principales requisitos funcionales son:
 El proyecto está dividido en los siguientes paquetes:
 
 ````text
-│
-├── controller/    # Controladores REST (exponen los endpoints)
-├── service/       # Lógica de negocio
-├── repository/    # Interfaces de acceso a datos (Spring Data JPA)
-└── model/         # Entidades JPA (Hotel, Vuelo, Reserva)
+src
+└── main
+    ├── java
+    │   └── com.dam.apirestagenciaviajes
+    │       ├── controller/
+    │       ├── model/
+    │       ├── repository/
+    │       ├── service/
+    │       └── ApiRestAgenciaViajesApplication.java
+    │
+    └── resources
+        ├── static
+        │   ├── js/
+        │   ├── styles/
+        │   ├── hotel.html
+        │   ├── index.html
+        │   ├── mostrar.html
+        │   ├── reserva.html
+        │   └── vuelo.html
+        └── application.properties
 ````
 
 ---
