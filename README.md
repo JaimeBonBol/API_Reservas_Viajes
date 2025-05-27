@@ -190,6 +190,7 @@ Ejemplo de RequestBody:
 
 La aplicación cuenta con una interfaz gráfica web para mostrar los hoteles, los vuelos
 y las reservas de la base de datos.
+También cuenta con las opciones de realizar la creación, actualización y eliminación de cada una de las entidades (Hoteles, Vuelos y Reservas).
 
 ### ¿Cóomo acceder?
 
